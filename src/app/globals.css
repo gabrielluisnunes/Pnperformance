@@ -1,42 +1,54 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', sans-serif;
+  color: #333;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.bg-navy {
+    background-color: #0F172A !important;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.bg-accent {
+    background-color: #0EA5E9 !important;
+}
+.text-accent {
+    color: #0EA5E9 !important;
+}
+.btn-accent {
+    background-color: #0EA5E9;
+    border-color: #0EA5E9;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+.btn-accent:hover {
+    background-color: #0284C7;
+    border-color: #0284C7;
+    color: white;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.service-card {
+    background-color: #1A253A;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    height: 100%;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animated {
+    opacity: 1;
+    transform: translateY(0);
 }
