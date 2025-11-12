@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import Footer from '../components/Footer';
 
 interface CustomWindow extends Window {
     Swiper: any; 
@@ -48,6 +49,29 @@ const pillars = [
     { icon: "📊", title: "Relatórios e Transparência", description: "Dashboards claros sobre ROI e faturamento. Total transparência no investimento." }
 ];
 
+const methodSteps = [
+    { 
+        id: 1, 
+        title: "Diagnóstico estratégico", 
+        description: "Entendemos seu mercado, ticket e metas para desenhar a rota mais curta até os resultados." 
+    },
+    { 
+        id: 2, 
+        title: "Posicionamento digital", 
+        description: "Landing page, Google Meu Negócio e presença social alinhadas para conversão e autoridade." 
+    },
+    { 
+        id: 3, 
+        title: "Captação Inteligente", 
+        description: "Campanhas no Google & Meta voltadas a leads qualificados, com segmentação e teste contínuo." 
+    },
+    { 
+        id: 4, 
+        title: "Otimização contínua", 
+        description: "Medição em tempo real, relatórios claros e ajustes semanais para reduzir custo por cliente." 
+    },
+];
+
 const logos = [
     { src: "/images/1.jpeg", alt: "Cliente 1" },
     { src: "/images/2.jpeg", alt: "Cliente 2" },
@@ -65,6 +89,7 @@ export default function Home() {
     const servicesSwiperRef = useRef(null);
     const pilaresSwiperRef = useRef(null);
     const socialSwiperRef = useRef(null);
+    const methodSwiperRef = useRef(null);
 
     const initializeSwipers = useCallback(() => {
         
@@ -125,6 +150,26 @@ export default function Home() {
                         768: {
                             enabled: false,
                             spaceBetween: 0,
+                        }
+                    }
+                });
+            }
+            
+            if (methodSwiperRef.current) {
+                new Swiper(methodSwiperRef.current, {
+                    slidesPerView: 1.2, 
+                    spaceBetween: 16,
+                    loop: false,
+                    autoHeight: false, 
+                    pagination: {
+                        el: '#method-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 4, 
+                            enabled: false,
+                            spaceBetween: 20,
                         }
                     }
                 });
@@ -196,7 +241,7 @@ export default function Home() {
             `Olá, PN Performance!\n\nMeu nome é ${nome} da empresa ${empresa}.\nMeu WhatsApp é ${whatsapp}.\n\nGostaria de solicitar o Diagnóstico Gratuito.`
         );
 
-        const whatsappUrl = `https://wa.me/${5545991272492}?text=${message}`;
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
         
         window.open(whatsappUrl, '_blank');
         
@@ -214,88 +259,11 @@ export default function Home() {
 
     return (
         <main>
-            <style jsx global>{`
-                      body {
-                          overflow-x: hidden;
-                      }
-
-                      .bg-dark-section {
-                          color: white !important; 
-                      }
-                      
-                      .service-card, .card.h-100 {
-                          min-height: 250px; 
-                          height: 100%; 
-                          padding: 2rem;
-                          background-color: #1f2937; 
-                          border-radius: 12px;
-                          display: flex; 
-                          flex-direction: column;
-                      }
-                      
-                      
-                      #home {
-                          min-height: 90vh;
-                          background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/banner.png);
-                          background-repeat: no-repeat;
-                          background-position: center center;
-                          background-size: cover;
-                      }
-
-                     
-                      @media (max-width: 767px) {
-                          #home {
-                              min-height: 70vh; 
-                              background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/bannermobile.png); 
-                              background-position: center top; 
-                              background-size: cover; 
-                          }
-
-                          .swiper-container {
-                              padding-left: 1rem; 
-                              padding-right: 1rem; 
-                              overflow: visible; 
-                              height: auto; 
-                          }
-                          
-                          .swiper-container .swiper-wrapper {
-                              align-items: stretch; 
-                          }
-
-                          .swiper-container .swiper-slide {
-                              height: 100% !important; 
-                          }
-
-                          .swiper-slide .service-card {
-                              height: 100%; 
-                          }
-                          
-                          .social-swiper-container {
-                              padding: 0 1rem;
-                          }
-                          .social-swiper-container .swiper-slide {
-                              width: auto; 
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                          }
-                      }
-                      
-                      .animate-on-scroll {
-                          opacity: 0;
-                          transform: translateY(30px); 
-                          transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
-                      }
-                      .animate-on-scroll.animated {
-                          opacity: 1;
-                          transform: translateY(0);
-                      }
-              `}</style>
             
             <section 
                 id="home"
                 className="bg-navy text-white d-flex align-items-center bg-dark-section" 
-                
+                ref={addRef as any}
             >
                 <div className="container text-center py-5">
                     <div className="row justify-content-center">
@@ -306,7 +274,7 @@ export default function Home() {
                             <a 
                                 href="#contato" 
                                 className="btn btn-accent btn-lg mt-3 text-white fw-bold shadow-lg text-uppercase animate-on-scroll"
-                                ref={addRef as any}
+                                
                             >
                                 Quero Escalar Meu Negócio Agora!
                             </a>
@@ -351,6 +319,73 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+            
+            <section className="py-5 bg-dark-section animate-on-scroll" ref={addRef as any} style={{ backgroundColor: '#0f172a' }}> 
+                <div className="container">
+                    <div className="text-center mb-5">
+                        <h2 className="fw-bold display-6 mb-2 text-white">O método PN Performance de captação de clientes</h2>
+                        <p className="lead text-white-50">Muito além de anúncios: cuidamos de todo o processo, do clique até a venda.</p>
+                    </div>
+
+                    <Row className="g-4 justify-content-center d-none d-md-flex">
+                        {methodSteps.map((step) => (
+                            <Col lg={3} md={6} key={`method-desktop-${step.id}`}>
+                                <div className="service-card h-100 shadow-lg p-4 text-center" style={{ backgroundColor: '#1e293b', border: '1px solid #334155' }}>
+                                    <div className="mb-3">
+                                        <span className="badge bg-primary rounded-circle" style={{ width: '30px', height: '30px', lineHeight: '25px', fontSize: '1rem' }}>{step.id}</span>
+                                    </div>
+                                    <h3 className="h5 fw-bold mb-2 text-white">{step.title}</h3>
+                                    <p className="text-white-50">{step.description}</p>
+                                </div>
+                            </Col>
+                        ))}
+                    </Row>
+
+                    <div className="text-center mt-5 d-none d-md-block">
+                        <a 
+                            href="#contato" 
+                            className="btn btn-lg fw-bold shadow-lg text-white d-inline-block"
+                            style={{ backgroundColor: '#22c55e', borderColor: '#22c55e', padding: '10px 30px' }}
+                        >
+                            Quero aplicar o método no meu negócio
+                        </a>
+                    </div>
+                    
+                    <div className="d-md-none">
+                        <div className="swiper-container" ref={methodSwiperRef}> 
+                            <div className="swiper-wrapper py-3">
+                                {methodSteps.map((step) => (
+                                    <div 
+                                        className="swiper-slide" 
+                                        key={`method-mobile-${step.id}`} 
+                                        style={{ width: '80%' }} 
+                                    >
+                                        <div className="service-card shadow-lg p-4" style={{ backgroundColor: '#1e293b', border: '1px solid #334155', height: '100%' }}> 
+                                            <div className="mb-3">
+                                                <span className="badge bg-primary rounded-circle" style={{ width: '30px', height: '30px', lineHeight: '25px', fontSize: '1rem' }}>{step.id}</span>
+                                            </div>
+                                            <h3 className="h5 fw-bold mb-2 text-white">{step.title}</h3>
+                                            <p className="text-white-50">{step.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="swiper-pagination mt-4" id="method-pagination"></div>
+                        </div>
+                    </div>
+                    
+                    <div className="text-center mt-4 d-md-none">
+                        <a 
+                            href="#contato" 
+                            className="btn btn-lg fw-bold shadow-lg text-white w-100 mx-3"
+                            style={{ backgroundColor: '#22c55e', borderColor: '#22c55e', padding: '10px 30px' }}
+                        >
+                            Quero aplicar o método no meu negócio
+                        </a>
+                    </div>
+
                 </div>
             </section>
 
@@ -512,12 +547,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <footer className="bg-navy text-white-50 py-4 bg-dark-section"> 
-                <div className="container text-center">
-                    <p className="mb-0">&copy; {new Date().getFullYear()} PN Performance Mídia. Todos os direitos reservados.</p>
-                    <small className="d-block mt-1">CNPJ: 00.000.000/0001-00 | <Link href="#" className="text-white-50 text-decoration-none">Política de Privacidade</Link></small>
-                </div>
-            </footer>
+            <Footer />
         </main>
     );
 }

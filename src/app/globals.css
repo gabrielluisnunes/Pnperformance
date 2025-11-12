@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
+
 body {
-  font-family: 'Inter', sans-serif;
-  color: #333;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    overflow-x: hidden;
 }
+
 
 .bg-navy {
     background-color: #0F172A !important;
@@ -28,6 +31,21 @@ body {
     color: white;
 }
 
+
+.bg-dark-section {
+    color: white !important; 
+}
+
+.service-card, .card.h-100 {
+    min-height: 250px; 
+    height: 100%; 
+    padding: 2rem;
+    background-color: #1f2937; 
+    border-radius: 12px;
+    display: flex; 
+    flex-direction: column;
+}
+
 .service-card {
     background-color: #1A253A;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -42,6 +60,16 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
+
+#home {
+    min-height: 90vh;
+    background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/banner.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(20px);
@@ -51,4 +79,44 @@ body {
 .animated {
     opacity: 1;
     transform: translateY(0);
+}
+
+
+
+@media (max-width: 767px) {
+    #home {
+        min-height: 70vh; 
+        background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/bannermobile.png); 
+        background-position: center top; 
+        background-size: cover; 
+    }
+
+    .swiper-container {
+        padding-left: 1rem; 
+        padding-right: 1rem; 
+        overflow: visible; 
+        height: auto; 
+    }
+    
+    .swiper-container .swiper-wrapper {
+        align-items: stretch; 
+    }
+
+    .swiper-container .swiper-slide {
+        height: 100% !important; 
+    }
+
+    .swiper-slide .service-card {
+        height: 100%; 
+    }
+    
+    .social-swiper-container {
+        padding: 0 1rem;
+    }
+    .social-swiper-container .swiper-slide {
+        width: auto; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
