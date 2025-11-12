@@ -241,7 +241,7 @@ export default function Home() {
             `Olá, PN Performance!\n\nMeu nome é ${nome} da empresa ${empresa}.\nMeu WhatsApp é ${whatsapp}.\n\nGostaria de solicitar o Diagnóstico Gratuito.`
         );
 
-        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+        const whatsappUrl = `https://wa.me/${5545991272492}?text=${message}`;
         
         window.open(whatsappUrl, '_blank');
         
@@ -269,7 +269,7 @@ export default function Home() {
                     <div className="row justify-content-center">
                         <div className="col-lg-10 col-xl-8">
                             <h1 className="display-3 fw-bold mb-4 animate-on-scroll">
-                                <span className="text-accent">Chega de Tráfego que Não Converte:</span> Performance de Mídia Paga com ROI Comprovado.
+                                <span className="text-accent">Chega de Tráfego que não Converte:</span> Performance de Mídia Paga com ROI Comprovado.
                             </h1>
                             <a 
                                 href="#contato" 
@@ -434,7 +434,7 @@ export default function Home() {
 
             <section className="py-5 animate-on-scroll" ref={addRef as any}>
                 <div className="container">
-                    <h2 className="text-center mb-5 fw-bold">Nossa Estrutura, Seu Crescimento.</h2>
+                    <h2 className="text-center mb-5 fw-bold">Nossa Estrutura, seu crescimento.</h2>
                     <p className="text-center lead mb-5 text-muted">A PN Performance atua em três pilares essenciais para garantir que cada centavo investido retorne com lucro.</p>
                     
                     <Row className="g-4 d-none d-md-flex">
@@ -479,7 +479,7 @@ export default function Home() {
             <section className="bg-navy py-5 bg-dark-section animate-on-scroll" ref={addRef as any}> 
                 <div className="container text-center">
                     <h2 className="fw-bold mb-3">Pronto para Ver Seu Dinheiro Trabalhar de Verdade?</h2>
-                    <p className="lead mb-4 text-white-50">Fale com o Vini, especialista que estará à frente do seu projeto.</p>
+                    <p className="lead mb-4 text-white-50">Fale com nosso time, especialistas que estarão à frente do seu negócio.</p>
                     <a 
                         href="#contato" 
                         className="btn btn-accent btn-lg fw-bold shadow-sm text-white" 
