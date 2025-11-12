@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa'; 
 
-const FACEBOOK_URL = "https://www.facebook.com/pnperformance"; 
-const INSTAGRAM_URL = "https://www.instagram.com/pnperformance"; 
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61576695808195&locale=pt_BR"; 
+const INSTAGRAM_URL = "https://www.instagram.com/pnmidiagestao/"; 
 
 const Footer = () => {
     return (
