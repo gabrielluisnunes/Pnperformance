@@ -2,14 +2,14 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Navbar, Container, Button } from 'react-bootstrap';
-// Removemos a importação de 'next/image'
+
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Verifica se a rolagem ultrapassou 50px
+      
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
@@ -20,7 +20,7 @@ export default function Header() {
     <Navbar 
       fixed="top" 
       expand="lg" 
-      // Definimos bg-navy como padrão e adicionamos shadow-lg ao rolar.
+      
       className={`py-3 transition duration-300 ease-in-out bg-navy ${isScrolled ? 'shadow-lg' : ''}`}
       style={{ transition: 'background-color 0.3s, box-shadow 0.3s' }}
       data-bs-theme="dark" 
@@ -29,10 +29,10 @@ export default function Header() {
         <Link 
           href="#home" 
           passHref 
-          // Retorna a classe para o estilo de texto original
+          
           className="navbar-brand fw-bold fs-4"
         >
-            {/* Retorna o texto da marca */}
+            {}
             <span className="text-white">PN</span><span className="text-accent">Performance Mídia</span>
         </Link>
         

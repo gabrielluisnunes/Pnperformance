@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 PN Performance Mídia - Landing Page de Alta Conversão
 
-## Getting Started
+O projeto consiste na criação da nova *Landing Page* institucional para a PN Performance, com o objetivo principal de **otimizar a captação de *leads* qualificados** através de uma experiência mobile e desktop de alta performance.
 
-First, run the development server:
+## 🌟 Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+A aplicação foi construída utilizando o stack moderno e otimizado para performance:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Categoria | Tecnologia |
+| :--- | :--- |
+| **Framework Principal** | ![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=next.js&logoColor=white) |
+| **Linguagem** | ![TypeScript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) |
+| **UI Kit** | ![Bootstrap](https://img.shields.io/badge/bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white) ![React Bootstrap](https://img.shields.io/badge/react%20bootstrap-563D7C?style=for-the-badge&logo=react-bootstrap&logoColor=white) |
+| **Estilização** | ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) |
+| **Hospedagem** | ![Vercel](https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) |
+| **Controle de Versão** | ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Finalidade do Projeto
 
-## Learn More
+A principal finalidade desta aplicação é atuar como o **ponto central de conversão** da empresa, substituindo o antigo site institucional (WordPress) por uma experiência de página única, leve e focada em resultados.
 
-To learn more about Next.js, take a look at the following resources:
+* **Captação de Leads:** Converter visitantes em contatos via WhatsApp de forma imediata.
+* **Performance:** Garantir carregamento ultrarrápido (Core Web Vitals) e alta pontuação no Google PageSpeed, essenciais para campanhas de mídia paga.
+* **Responsividade:** Oferecer uma experiência de usuário (UX) perfeita em qualquer dispositivo, com layout e imagens customizadas para mobile.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Deploy e Acesso
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O projeto está configurado para **Continuous Deployment (CD)** via Vercel, garantindo que qualquer *push* para o branch `main` seja automaticamente publicado no ambiente de produção.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Autor
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Desenvolvido por: *Gabriel Luis Parede Nunes*

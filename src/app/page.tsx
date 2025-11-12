@@ -36,11 +36,6 @@ const services = [
         icon: "📱" 
     },
     { 
-        title: "Criativos Profissionais", 
-        description: "Vídeos e imagens de alto impacto para conversões.", 
-        icon: "🎥" 
-    },
-    { 
         title: "Relatórios em Tempo Real", 
         description: "Transparência total: acompanhe seus resultados em tempo real.", 
         icon: "📊" 
@@ -198,7 +193,7 @@ export default function Home() {
         const whatsapp = data.get('whatsapp') as string;
 
         const message = encodeURIComponent(
-            `Olá, PN Performance!\n\nMeu nome é *${nome}* da empresa *${empresa}*.\nMeu WhatsApp é *${whatsapp}*.\n\nGostaria de solicitar o Diagnóstico Gratuito.`
+            `Olá, PN Performance!\n\nMeu nome é ${nome} da empresa ${empresa}.\nMeu WhatsApp é ${whatsapp}.\n\nGostaria de solicitar o Diagnóstico Gratuito.`
         );
 
         const whatsappUrl = `https://wa.me/${5545991272492}?text=${message}`;
@@ -220,80 +215,82 @@ export default function Home() {
     return (
         <main>
             <style jsx global>{`
-                body {
-                    overflow-x: hidden;
-                }
+                      body {
+                          overflow-x: hidden;
+                      }
 
-                .bg-dark-section {
-                    color: white !important; 
-                }
-                
-                .service-card, .card.h-100 {
-                    min-height: 250px; 
-                    height: 100%; 
-                    padding: 2rem;
-                    background-color: #1f2937; 
-                    border-radius: 12px;
-                    display: flex; 
-                    flex-direction: column;
-                }
-                
-                
-                #home {
-                    min-height: 90vh;
-                    background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/banner.png);
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    background-size: cover;
-                }
+                      .bg-dark-section {
+                          color: white !important; 
+                      }
+                      
+                      .service-card, .card.h-100 {
+                          min-height: 250px; 
+                          height: 100%; 
+                          padding: 2rem;
+                          background-color: #1f2937; 
+                          border-radius: 12px;
+                          display: flex; 
+                          flex-direction: column;
+                      }
+                      
+                      
+                      #home {
+                          min-height: 90vh;
+                          background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/banner.png);
+                          background-repeat: no-repeat;
+                          background-position: center center;
+                          background-size: cover;
+                      }
 
-                
-                @media (max-width: 767px) {
-                    #home {
-                        min-height: 70vh; 
-                        background-position: center top; 
-                    }
+                     
+                      @media (max-width: 767px) {
+                          #home {
+                              min-height: 70vh; 
+                              background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/bannermobile.png); 
+                              background-position: center top; 
+                              background-size: cover; 
+                          }
 
-                    .swiper-container {
-                        padding-left: 1rem; 
-                        padding-right: 1rem; 
-                        overflow: visible; 
-                        height: auto; 
-                    }
-                    
-                    .swiper-container .swiper-wrapper {
-                        align-items: stretch; 
-                    }
+                          .swiper-container {
+                              padding-left: 1rem; 
+                              padding-right: 1rem; 
+                              overflow: visible; 
+                              height: auto; 
+                          }
+                          
+                          .swiper-container .swiper-wrapper {
+                              align-items: stretch; 
+                          }
 
-                    .swiper-container .swiper-slide {
-                        height: 100% !important; 
-                    }
+                          .swiper-container .swiper-slide {
+                              height: 100% !important; 
+                          }
 
-                    .swiper-slide .service-card {
-                        height: 100%; 
-                    }
-                    
-                    .social-swiper-container {
-                        padding: 0 1rem;
-                    }
-                    .social-swiper-container .swiper-slide {
-                        width: auto; 
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-                }
-                
-                .animate-on-scroll {
-                    opacity: 0;
-                    transform: translateY(30px); 
-                    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
-                }
-                .animate-on-scroll.animated {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            `}</style>
+                          .swiper-slide .service-card {
+                              height: 100%; 
+                          }
+                          
+                          .social-swiper-container {
+                              padding: 0 1rem;
+                          }
+                          .social-swiper-container .swiper-slide {
+                              width: auto; 
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                          }
+                      }
+                      
+                      .animate-on-scroll {
+                          opacity: 0;
+                          transform: translateY(30px); 
+                          transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+                      }
+                      .animate-on-scroll.animated {
+                          opacity: 1;
+                          transform: translateY(0);
+                      }
+              `}</style>
             
             <section 
                 id="home"
@@ -306,9 +303,6 @@ export default function Home() {
                             <h1 className="display-3 fw-bold mb-4 animate-on-scroll">
                                 <span className="text-accent">Chega de Tráfego que Não Converte:</span> Performance de Mídia Paga com ROI Comprovado.
                             </h1>
-                            <p className="lead mb-4 animate-on-scroll" ref={addRef as any}>
-                                Somos a PN Performance, a agência que une estratégia e tecnologia para transformar investimento em faturamento. Se o seu objetivo é escalar resultados, você está no lugar certo.
-                            </p>
                             <a 
                                 href="#contato" 
                                 className="btn btn-accent btn-lg mt-3 text-white fw-bold shadow-lg text-uppercase animate-on-scroll"
@@ -364,7 +358,7 @@ export default function Home() {
                 <div className="container">
                     <div className="text-center mb-5">
                         <h2 className="fw-bold display-6 mb-2">Serviços que fazem parte da nossa assessoria</h2>
-                        <p className="lead text-white-50">Tudo incluso na nossa assessoria mensal — sem complicações.</p>
+                        <p className="lead text-white-50">Tudo incluso na nossa assessoria mensal sem complicações.</p>
                     </div>
 
                     <Row className="g-4 justify-content-center d-none d-md-flex">
