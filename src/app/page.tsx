@@ -2,53 +2,167 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import { SendFill } from 'react-bootstrap-icons'; 
+
+interface CustomWindow extends Window {
+    Swiper: any; 
+}
+
+declare const window: CustomWindow; 
 
 const services = [
     { 
         title: "Gestão de Anúncios", 
-        description: "Campanhas no Google & Meta otimizadas para gerar leads qualificados.", 
+        description: "Campanhas no Google e Meta focadas em leads qualificados.", 
         icon: "📈" 
     },
     { 
         title: "Landing Pages que Convertem", 
-        description: "Páginas rápidas e estratégicas, feitas para transformar cliques em clientes.", 
+        description: "Páginas estratégicas para transformar seus cliques em clientes.", 
         icon: "🖥️" 
     },
     { 
         title: "Google Meu Negócio", 
-        description: "Mais visibilidade local para atrair clientes prontos para fechar.", 
+        description: "Aumentamos sua visibilidade local e atração de clientes.", 
         icon: "📍" 
     },
     { 
         title: "Chatbot IA no WhatsApp", 
-        description: "Atendimento automático e personalizado 24 horas por dia.", 
+        description: "Atendimento via WhatsApp com IA, 24 horas por dia.", 
         icon: "🤖" 
     },
     { 
         title: "Gestão de Social Media", 
-        description: "Conteúdo consistente que fortalece a presença digital da sua marca.", 
+        description: "Fortalecemos sua marca com conteúdo consistente.", 
         icon: "📱" 
     },
     { 
         title: "Criativos Profissionais", 
-        description: "Imagens e vídeos de alto impacto para aumentar cliques e conversões.", 
+        description: "Vídeos e imagens de alto impacto para conversões.", 
         icon: "🎥" 
     },
     { 
         title: "Relatórios em Tempo Real", 
-        description: "Total transparência: acompanhe seus resultados a qualquer momento.", 
+        description: "Transparência total: acompanhe seus resultados em tempo real.", 
         icon: "📊" 
     },
 ];
 
-const WHATSAPP_NUMBER = "5511999999999"; 
+const pillars = [
+    { icon: "⭐", title: "Estratégia e Planejamento", description: "Planejamento de funil de vendas e jornada de compra para o público ideal." },
+    { icon: "📈", title: "Execução de Alta Performance", description: "Otimização em tempo real (Google, Meta, TikTok) para maximizar seu CPA." },
+    { icon: "📊", title: "Relatórios e Transparência", description: "Dashboards claros sobre ROI e faturamento. Total transparência no investimento." }
+];
+
+const logos = [
+    { src: "/images/1.jpeg", alt: "Cliente 1" },
+    { src: "/images/2.jpeg", alt: "Cliente 2" },
+    { src: "/images/3.jpeg", alt: "Cliente 3" },
+    { src: "/images/4.jpeg", alt: "Cliente 4" },
+    { src: "/images/5.jpeg", alt: "Cliente 5" },
+];
+
+const WHATSAPP_NUMBER = "5545991272492"; 
 
 export default function Home() {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const sectionsRef = useRef<(HTMLElement | null)[]>([]);
+    
+    const servicesSwiperRef = useRef(null);
+    const pilaresSwiperRef = useRef(null);
+    const socialSwiperRef = useRef(null);
 
-    const setupIntersectionObserver = useCallback(() => {
+    const initializeSwipers = useCallback(() => {
+        
+        if (typeof window.Swiper !== 'undefined') {
+            const Swiper = window.Swiper;
+
+            if (servicesSwiperRef.current) {
+                new Swiper(servicesSwiperRef.current, {
+                    slidesPerView: 1.2, 
+                    spaceBetween: 16,
+                    loop: false,
+                    autoHeight: false, 
+                    pagination: {
+                        el: '#services-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 'auto',
+                            enabled: false,
+                            spaceBetween: 0,
+                        }
+                    }
+                });
+            }
+
+            if (pilaresSwiperRef.current) {
+                new Swiper(pilaresSwiperRef.current, {
+                    slidesPerView: 1.2,
+                    spaceBetween: 16,
+                    loop: false,
+                    autoHeight: false, 
+                    pagination: {
+                        el: '#pilares-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        768: {
+                            slidesPerView: 'auto',
+                            enabled: false,
+                            spaceBetween: 0,
+                        }
+                    }
+                });
+            }
+            
+            if (socialSwiperRef.current) {
+                new Swiper(socialSwiperRef.current, {
+                    slidesPerView: 'auto', 
+                    centeredSlides: false,
+                    spaceBetween: 20,
+                    loop: true,
+                    autoplay: {
+                        delay: 3500,
+                        disableOnInteraction: false,
+                    },
+                    breakpoints: {
+                        768: {
+                            enabled: false,
+                            spaceBetween: 0,
+                        }
+                    }
+                });
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        const loadSwiperScript = () => {
+            if (typeof window !== 'undefined' && !(document.querySelector('#swiper-script'))) {
+                const script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+                script.id = 'swiper-script';
+                script.onload = initializeSwipers;
+                document.head.appendChild(script);
+            } else if (typeof window !== 'undefined' && window.Swiper) {
+                initializeSwipers();
+            }
+        };
+
+        const loadSwiperStyle = () => {
+            if (typeof window !== 'undefined' && !(document.querySelector('#swiper-style'))) {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+                link.id = 'swiper-style';
+                document.head.appendChild(link);
+            }
+        };
+
+        loadSwiperStyle();
+        loadSwiperScript();
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -56,7 +170,9 @@ export default function Home() {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { 
+            threshold: 0.1
+        });
 
         sectionsRef.current.forEach(section => {
             if (section) {
@@ -64,12 +180,11 @@ export default function Home() {
             }
         });
 
-        return () => observer.disconnect();
-    }, []);
+        return () => {
+             observer.disconnect();
+        };
 
-    useEffect(() => {
-        setupIntersectionObserver();
-    }, [setupIntersectionObserver]);
+    }, [initializeSwipers]);
     
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -86,7 +201,7 @@ export default function Home() {
             `Olá, PN Performance!\n\nMeu nome é *${nome}* da empresa *${empresa}*.\nMeu WhatsApp é *${whatsapp}*.\n\nGostaria de solicitar o Diagnóstico Gratuito.`
         );
 
-        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+        const whatsappUrl = `https://wa.me/${5545991272492}?text=${message}`;
         
         window.open(whatsappUrl, '_blank');
         
@@ -104,10 +219,86 @@ export default function Home() {
 
     return (
         <main>
+            <style jsx global>{`
+                body {
+                    overflow-x: hidden;
+                }
+
+                .bg-dark-section {
+                    color: white !important; 
+                }
+                
+                .service-card, .card.h-100 {
+                    min-height: 250px; 
+                    height: 100%; 
+                    padding: 2rem;
+                    background-color: #1f2937; 
+                    border-radius: 12px;
+                    display: flex; 
+                    flex-direction: column;
+                }
+                
+                
+                #home {
+                    min-height: 90vh;
+                    background-image: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/banner.png);
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: cover;
+                }
+
+                
+                @media (max-width: 767px) {
+                    #home {
+                        min-height: 70vh; 
+                        background-position: center top; 
+                    }
+
+                    .swiper-container {
+                        padding-left: 1rem; 
+                        padding-right: 1rem; 
+                        overflow: visible; 
+                        height: auto; 
+                    }
+                    
+                    .swiper-container .swiper-wrapper {
+                        align-items: stretch; 
+                    }
+
+                    .swiper-container .swiper-slide {
+                        height: 100% !important; 
+                    }
+
+                    .swiper-slide .service-card {
+                        height: 100%; 
+                    }
+                    
+                    .social-swiper-container {
+                        padding: 0 1rem;
+                    }
+                    .social-swiper-container .swiper-slide {
+                        width: auto; 
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+                
+                .animate-on-scroll {
+                    opacity: 0;
+                    transform: translateY(30px); 
+                    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+                }
+                .animate-on-scroll.animated {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            `}</style>
+            
             <section 
                 id="home"
-                className="bg-navy text-white d-flex align-items-center" 
-                style={{ minHeight: '90vh', background: 'linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url(/images/hero-bg.jpg) no-repeat center center', backgroundSize: 'cover' }}
+                className="bg-navy text-white d-flex align-items-center bg-dark-section" 
+                
             >
                 <div className="container text-center py-5">
                     <div className="row justify-content-center">
@@ -133,26 +324,53 @@ export default function Home() {
             <section className="py-4 bg-light text-center animate-on-scroll" ref={addRef as any}>
                 <div className="container">
                     <h2 className="text-secondary mb-4 fs-6 text-uppercase fw-light">Resultados Entregues para Empresas em Destaque</h2>
-                    <Row className="justify-content-center align-items-center g-4">
-                        <Col xs={4} md={2}><img src="/images/logo-placeholder.png" alt="Cliente 1" className="img-fluid opacity-50" style={{ maxHeight: '40px' }} /></Col>
-                        <Col xs={4} md={2}><img src="/images/logo-placeholder.png" alt="Cliente 2" className="img-fluid opacity-50" style={{ maxHeight: '40px' }} /></Col>
-                        <Col xs={4} md={2}><img src="/images/logo-placeholder.png" alt="Cliente 3" className="img-fluid opacity-50" style={{ maxHeight: '40px' }} /></Col>
-                        <Col xs={4} md={2} className="d-none d-md-block"><img src="/images/logo-placeholder.png" alt="Cliente 4" className="img-fluid opacity-50" style={{ maxHeight: '40px' }} /></Col>
+                    
+                    <Row className="justify-content-center align-items-center g-4 d-none d-md-flex">
+                        {logos.map((logo, index) => (
+                            <Col md={2} key={`logo-desktop-${index}`}>
+                                <img 
+                                    src={logo.src} 
+                                    alt={logo.alt} 
+                                    className="img-fluid" 
+                                    style={{ maxHeight: '60px' }} 
+                                />
+                            </Col>
+                        ))}
                     </Row>
+
+                    <div className="d-md-none social-swiper-container">
+                        <div className="swiper-container" ref={socialSwiperRef}>
+                            <div className="swiper-wrapper py-2">
+                                {logos.map((logo, index) => (
+                                    <div 
+                                        className="swiper-slide" 
+                                        key={`logo-mobile-${index}`} 
+                                    >
+                                        <img 
+                                            src={logo.src} 
+                                            alt={logo.alt} 
+                                            className="img-fluid" 
+                                            style={{ maxHeight: '60px' }} 
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section className="py-5 bg-navy text-white animate-on-scroll" ref={addRef as any}>
+            <section className="py-5 bg-navy bg-dark-section animate-on-scroll" ref={addRef as any}> 
                 <div className="container">
                     <div className="text-center mb-5">
                         <h2 className="fw-bold display-6 mb-2">Serviços que fazem parte da nossa assessoria</h2>
-                        <p className="lead text-white-50">Tudo incluso na nossa assessoria mensal sem complicações.</p>
+                        <p className="lead text-white-50">Tudo incluso na nossa assessoria mensal — sem complicações.</p>
                     </div>
 
-                    <Row className="g-4 justify-content-center">
+                    <Row className="g-4 justify-content-center d-none d-md-flex">
                         {services.map((service, index) => (
-                            <Col md={6} lg={4} key={index}>
-                                <div className="service-card shadow-lg">
+                            <Col md={6} lg={4} key={`service-desktop-${index}`}>
+                                <div className="service-card h-100 shadow-lg">
                                     <div className="text-accent mb-3 fs-3">{service.icon}</div>
                                     <h3 className="h5 fw-bold mb-2">{service.title}</h3>
                                     <p className="text-white-50">{service.description}</p>
@@ -160,6 +378,28 @@ export default function Home() {
                             </Col>
                         ))}
                     </Row>
+                    
+                    <div className="d-md-none">
+                        <div className="swiper-container" ref={servicesSwiperRef}> 
+                            <div className="swiper-wrapper py-3">
+                                {services.map((service, index) => (
+                                    <div 
+                                        className="swiper-slide" 
+                                        key={`service-mobile-${index}`} 
+                                        style={{ width: '80%' }} 
+                                    >
+                                        <div className="service-card shadow-lg"> 
+                                            <div className="text-accent mb-3 fs-3">{service.icon}</div>
+                                            <h3 className="h5 fw-bold mb-2">{service.title}</h3>
+                                            <p className="text-white-50">{service.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="swiper-pagination mt-4" id="services-pagination"></div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 
@@ -168,41 +408,54 @@ export default function Home() {
                     <h2 className="text-center mb-5 fw-bold">Nossa Estrutura, Seu Crescimento.</h2>
                     <p className="text-center lead mb-5 text-muted">A PN Performance atua em três pilares essenciais para garantir que cada centavo investido retorne com lucro.</p>
                     
-                    <Row className="g-4">
-                        <Col md={4}>
-                            <div className="card h-100 shadow-sm border-0 p-4 text-center">
-                                <div className="text-accent mb-3 fs-1">⭐</div>
-                                <h3 className="h5 fw-bold card-title">Estratégia e Planejamento</h3>
-                                <p className="card-text text-muted">Não fazemos campanhas por fazer. Definimos o público ideal, o funil de vendas e a jornada de compra, garantindo que a mídia atinja o alvo certo.</p>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div className="card h-100 shadow-sm border-0 p-4 text-center">
-                                <div className="text-accent mb-3 fs-1">📈</div>
-                                <h3 className="h5 fw-bold card-title">Execução de Alta Performance</h3>
-                                <p className="card-text text-muted">Especialistas em Google Ads, Meta Ads (Facebook e Instagram), TikTok e LinkedIn. Otimizamos em tempo real para maximizar o Custo por Aquisição (CPA).</p>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div className="card h-100 shadow-sm border-0 p-4 text-center">
-                                <div className="text-accent mb-3 fs-1">📊</div>
-                                <h3 className="h5 fw-bold card-title">Relatórios e Transparência</h3>
-                                <p className="card-text text-muted">Acesso a dashboards com dados claros sobre ROI e métricas. Você saberá exatamente como seu investimento está gerando faturamento. Sem letras miúdas.</p>
-                            </div>
-                        </Col>
+                    <Row className="g-4 d-none d-md-flex">
+                        {pillars.map((pillar, index) => (
+                            <Col md={4} key={`pillar-desktop-${index}`}>
+                                <div className="service-card h-100 shadow-sm border-0 p-4 text-center"> 
+                                    <div className="text-accent mb-3 fs-1">{pillar.icon}</div>
+                                    <h3 className="h5 fw-bold card-title">
+                                        <span className='text-white'>{pillar.title}</span> 
+                                    </h3>
+                                    <p className="card-text text-white-50">{pillar.description}</p> 
+                                </div>
+                            </Col>
+                        ))}
                     </Row>
+
+                    <div className="d-md-none">
+                        <div className="swiper-container" ref={pilaresSwiperRef}>
+                            <div className="swiper-wrapper py-3">
+                                {pillars.map((pilar, index) => (
+                                    <div 
+                                        className="swiper-slide" 
+                                        key={`pilar-mobile-${index}`} 
+                                        style={{ width: '80%' }}
+                                    >
+                                        <div className="service-card shadow-sm border-0 p-4 text-center"> 
+                                            <div className="text-accent mb-3 fs-1">{pilar.icon}</div>
+                                            <h3 className="h5 fw-bold card-title">
+                                                <span className='text-white'>{pilar.title}</span>
+                                            </h3>
+                                            <p className="card-text text-white-50">{pilar.description}</p> 
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="swiper-pagination mt-4" id="pilares-pagination"></div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section className="bg-accent text-white py-5 animate-on-scroll" ref={addRef as any}>
+            <section className="bg-navy py-5 bg-dark-section animate-on-scroll" ref={addRef as any}> 
                 <div className="container text-center">
                     <h2 className="fw-bold mb-3">Pronto para Ver Seu Dinheiro Trabalhar de Verdade?</h2>
-                    <p className="lead mb-4">Fale com o Vini, especialista que estará à frente do seu projeto.</p>
+                    <p className="lead mb-4 text-white-50">Fale com o Vini, especialista que estará à frente do seu projeto.</p>
                     <a 
                         href="#contato" 
-                        className="btn btn-dark btn-lg fw-bold shadow-sm"
+                        className="btn btn-accent btn-lg fw-bold shadow-sm text-white" 
                     >
-                        Falar com o Especialista (Sem Compromisso)
+                        Falar com nossa equipe
                     </a>
                 </div>
             </section>
@@ -228,15 +481,15 @@ export default function Home() {
                                     </div>
                                 )}
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Nome Completa</Form.Label>
+                                    <Form.Label htmlFor="nome">Nome Completo</Form.Label>
                                     <Form.Control type="text" id="nome" name="nome" placeholder="Seu nome" required disabled={status === 'loading'} />
                                 </Form.Group>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Nome da Empresa</Form.Label>
+                                    <Form.Label htmlFor="empresa">Nome da Empresa</Form.Label>
                                     <Form.Control type="text" id="empresa" name="empresa" placeholder="Sua empresa" required disabled={status === 'loading'} />
                                 </Form.Group>
                                 <Form.Group className="mb-4">
-                                    <Form.Label>WhatsApp</Form.Label>
+                                    <Form.Label htmlFor="whatsapp">WhatsApp</Form.Label>
                                     <Form.Control type="tel" id="whatsapp" name="whatsapp" placeholder="(XX) XXXXX-XXXX" required disabled={status === 'loading'} />
                                 </Form.Group>
                                 <Button 
@@ -252,7 +505,9 @@ export default function Home() {
                                         </>
                                     ) : (
                                         <>
-                                            <SendFill className="me-2" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="me-2" viewBox="0 0 16 16">
+                                                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.05A.5.5 0 0 0 .043 5.371l.745 3.328A.5.5 0 0 0 1.258 9.07l.872-.083 8.356-4.296L7.498 12.33a.5.5 0 0 0 .151.724l.43.255 3.016 1.778a.5.5 0 0 0 .7.027l7.55-7.55a.5.5 0 0 0 .027-.7z"/>
+                                            </svg>
                                             Iniciar Conversa no WhatsApp
                                         </>
                                     )}
@@ -263,9 +518,9 @@ export default function Home() {
                 </div>
             </section>
 
-            <footer className="bg-navy text-white-50 py-4">
+            <footer className="bg-navy text-white-50 py-4 bg-dark-section"> 
                 <div className="container text-center">
-                    <p className="mb-0">&copy; {new Date().getFullYear()} PN Performance. Todos os direitos reservados.</p>
+                    <p className="mb-0">&copy; {new Date().getFullYear()} PN Performance Mídia. Todos os direitos reservados.</p>
                     <small className="d-block mt-1">CNPJ: 00.000.000/0001-00 | <Link href="#" className="text-white-50 text-decoration-none">Política de Privacidade</Link></small>
                 </div>
             </footer>
