@@ -2,6 +2,8 @@
 
 O projeto consiste na criação da nova *Landing Page* institucional para a PN Performance, com o objetivo principal de **otimizar a captação de *leads* qualificados** através de uma experiência mobile e desktop de alta performance.
 
+Site: https://www.pnperformancemidia.com/
+
 ## 🌟 Tecnologias Utilizadas
 
 A aplicação foi construída utilizando o stack moderno e otimizado para performance:
